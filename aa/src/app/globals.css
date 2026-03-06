@@ -1,0 +1,340 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --bg-card: #0f3460;
+  --accent: #e94560;
+  --accent-hover: #c73652;
+  --operator-bg: #533483;
+  --operator-hover: #6b45a8;
+  --equal-bg: #e94560;
+  --equal-hover: #c73652;
+  --digit-bg: #1a1a2e;
+  --digit-hover: #2a2a4e;
+  --special-bg: #0f3460;
+  --special-hover: #1a4a7a;
+  --text-primary: #ffffff;
+  --text-secondary: #a8b2d8;
+  --display-bg: #0a0a1a;
+  --history-bg: #0d1b2a;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  padding: 20px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  gap: 30px;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+}
+
+.main-content {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Calculator */
+.calculator {
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  width: 340px;
+  flex-shrink: 0;
+}
+
+/* Display */
+.display {
+  background: var(--display-bg);
+  border-radius: 16px;
+  padding: 20px 16px 12px;
+  margin-bottom: 20px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.display-expression {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  min-height: 20px;
+  word-break: break-all;
+  text-align: right;
+  margin-bottom: 8px;
+}
+
+.display-value {
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--text-primary);
+  word-break: break-all;
+  text-align: right;
+  line-height: 1.1;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.display-value.small {
+  font-size: 1.6rem;
+}
+
+.display-value.xsmall {
+  font-size: 1.1rem;
+}
+
+/* Button Grid */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Calc Button */
+.calc-button {
+  border: none;
+  border-radius: 14px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  height: 62px;
+  transition: all 0.15s ease;
+  outline: none;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.calc-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.15s;
+  border-radius: inherit;
+}
+
+.calc-button:active::after {
+  background: rgba(255,255,255,0.15);
+}
+
+.calc-button.digit {
+  background: var(--digit-bg);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.calc-button.digit:hover {
+  background: var(--digit-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.calc-button.operator {
+  background: var(--operator-bg);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.calc-button.operator:hover {
+  background: var(--operator-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(83, 52, 131, 0.5);
+}
+
+.calc-button.equal {
+  background: var(--equal-bg);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 1.4rem;
+}
+
+.calc-button.equal:hover {
+  background: var(--equal-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(233, 69, 96, 0.5);
+}
+
+.calc-button.special {
+  background: var(--special-bg);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 1rem;
+  color: #7eb8f7;
+}
+
+.calc-button.special:hover {
+  background: var(--special-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.calc-button.clear {
+  background: #c0392b;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+}
+
+.calc-button.clear:hover {
+  background: #e74c3c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(192, 57, 43, 0.5);
+}
+
+.calc-button.span2 {
+  grid-column: span 2;
+}
+
+/* History Panel */
+.history-panel {
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 520px;
+}
+
+.history-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.history-clear-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.history-clear-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--text-primary);
+}
+
+.history-list {
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.history-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.history-list::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+
+.history-item {
+  background: var(--history-bg);
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: border-color 0.2s;
+}
+
+.history-item:hover {
+  border-color: rgba(255,255,255,0.15);
+}
+
+.history-expression {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+
+.history-result {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.history-time {
+  font-size: 0.65rem;
+  color: rgba(168, 178, 216, 0.5);
+  margin-top: 4px;
+}
+
+.history-empty {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 30px 0;
+  opacity: 0.6;
+}
+
+.error-text {
+  color: #e74c3c;
+  font-size: 1rem;
+}
+
+@media (max-width: 700px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .history-panel {
+    width: 340px;
+    max-height: 250px;
+  }
+  .app-title {
+    font-size: 1.5rem;
+  }
+}
